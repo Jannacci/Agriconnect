@@ -21,11 +21,24 @@ Dans cette troisième version, le système Agriconnect évolue en intégrant la 
 
 ## Lancement de l'application
 
-### 1. Dans une première CLI on compile et on lance la centrale
+### Lancement de la version 1
+
+#### 1. Dans une première CLI on compile et on lance la centrale
 - javac CentraleImpl.java (compilation de la centrale)
 - java CentraleImpl (lancement de la centrale)
 
-### 2. Dans une deuxième CLI, on compile et on lance le client
+#### 2. Dans une deuxième CLI, on compile et on lance les capteurs
+- javac Centrale.java (compilation de l'interface de la centrale RMI)
+- javac Capteur.java (compilation des capteurs)
+- java Capteur (lancement des capteurs)
+
+### Lancement de la version 2
+
+#### 1. Dans une première CLI on compile et on lance la centrale
+- javac CentraleImpl.java (compilation de la centrale)
+- java CentraleImpl (lancement de la centrale)
+
+#### 2. Dans une deuxième CLI, on compile et on lance le client
 - javac Centrale.java (compilation de l'interface de la centrale RMI)
 - javac Client.java (compilation du client)
 - java Client (lancement du client)
