@@ -35,7 +35,7 @@ public class Capteur {
         this.centrale = (Centrale) Naming.lookup("rmi://localhost/Centrale");
         this.codeUnique = generateCodeUnique();
         this.latitude = generateRandomCoordinate();
-        this. longitude = generateRandomCoordinate();
+        this.longitude = generateRandomCoordinate();
         this.timer = new Timer();
     }
 
