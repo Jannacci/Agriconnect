@@ -130,10 +130,9 @@ public class Capteur {
     /**
      * Arrête le timer du capteur.
      *
-     * @param ID Identifiant associé à l'arrêt du capteur.
      * @throws RemoteException si une erreur liée à la communication distante survient
      */
-    public void arreter(String ID) throws RemoteException {
+    public void arreter() throws RemoteException {
         timer.cancel();
     }
 }

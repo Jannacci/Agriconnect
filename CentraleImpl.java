@@ -65,7 +65,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * @throws RemoteException En cas d'erreur lors de la communication distante.
      */
     public synchronized void retirerCapteur(String codeUnique) throws RemoteException {
-        capteurs.get(codeUnique).arreter(codeUnique);
+        capteurs.get(codeUnique).arreter();
         capteurs.remove(codeUnique);
         System.out.println("\nCapteur " + codeUnique + " retiré.");
 
