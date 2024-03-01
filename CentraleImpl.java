@@ -23,15 +23,13 @@ import java.util.List;
  * @version 2.0
  * @since 2024-03-01
  */
-public class  CentraleImpl extends UnicastRemoteObject implements Centrale
-{
-    // Collection HashMap stockant les capteurs associés à leurs codes uniques.
-    private static HashMap<String, Capteur> capteurs;
+public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
+    private static HashMap<String, Capteur> capteurs;   // Collection HashMap stockant les capteurs associés à leurs codes uniques.
     
     /**
      * Constructeur par défaut de la classe CentraleImpl.
      *
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public CentraleImpl() throws RemoteException { 
         super();
@@ -42,18 +40,18 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * Ajoute un nouveau capteur à la centrale avec l'intervalle spécifié.
      *
      * @param intervalle Intervalle de mesure du capteur.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
-     * @throws MalformedURLException En cas d'URL mal formée lors de la communication avec le capteur.
-     * @throws NotBoundException Lorsque le capteur distant n'est pas lié correctement.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
+     * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
-    public synchronized void ajouterCapteur(int intervalle) throws RemoteException, MalformedURLException, NotBoundException {
+    public synchronized void ajouterCapteur(int intervalle) throws RemoteException, NotBoundException, MalformedURLException {
         Capteur capteur = new Capteur();
         
         capteurs.put(capteur.getCodeUnique(), capteur);
         System.out.println("\nCapteur " + capteur.getCodeUnique() + " de coordonnées " + capteurs.get(capteur.getCodeUnique()).getCoordonneesGPS() + " et d'intervalle " + intervalle + " ajouté.");
         try {
             capteur.demarrer(intervalle);
-        } catch (MalformedURLException | RemoteException | NotBoundException e) {
+        } catch (RemoteException | NotBoundException | MalformedURLException e) {
             e.printStackTrace();
         }        
     }
@@ -62,7 +60,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * Retire le capteur associé au code unique spécifié.
      *
      * @param codeUnique Code unique du capteur à retirer.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public synchronized void retirerCapteur(String codeUnique) throws RemoteException {
         capteurs.get(codeUnique).arreter();
@@ -75,7 +73,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * Liste tous les codes uniques des capteurs enregistrés dans la centrale.
      *
      * @return Liste des codes uniques des capteurs.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public String listerCapteurs() throws RemoteException {
         StringBuilder liste = new StringBuilder();
@@ -95,7 +93,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * @param codeUnique Code unique du capteur.
      * @param temperature Température enregistrée.
      * @param humidite Humidité enregistrée.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public void enregistrerMesures(String codeUnique, int temperature, int humidite) throws RemoteException {
         LocalDateTime heureActuelle = LocalDateTime.now();
@@ -118,7 +116,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      *
      * @param codeUnique Code unique du capteur.
      * @return Message contenant la dernière mesure ou une notification d'absence de mesures.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public String obtenirDerniereMesure(String codeUnique) throws RemoteException {
         String nomFichier = codeUnique + "_mesures.txt";
@@ -150,9 +148,9 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * Calcule et retourne les moyennes de température et d'humidité ainsi que les tendances sur une période spécifiée.
      *
      * @param codeUnique Code unique du capteur.
-     * @param periode     Période de calcul des moyennes et tendances ("heure" ou "jour").
+     * @param periode Période de calcul des moyennes et tendances ("heure" ou "journée").
      * @return Message contenant les moyennes, tendances et informations sur la période spécifiée.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public String obtenirMoyennesTendances(String codeUnique, String periode) throws RemoteException {
         String nomFichier = codeUnique + "_mesures.txt";
@@ -205,7 +203,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      *
      * @param valeurs Liste des valeurs pour lesquelles la tendance doit être déterminée.
      * @return Chaîne indiquant la tendance des valeurs.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public String determinerTendance(List<Integer> valeurs) throws RemoteException {
         int taille = valeurs.size();
@@ -230,9 +228,9 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      *
      * @param codeUnique Code unique du capteur.
      * @param nouvelIntervalle Nouvel intervalle de mesure.
-     * @throws MalformedURLException En cas d'URL mal formée lors de la communication avec le capteur.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
-     * @throws NotBoundException Lorsque le capteur distant n'est pas lié correctement.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
+     * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
     public void modifierIntervalleCapteur(String codeUnique, int nouvelIntervalle) throws MalformedURLException, RemoteException, NotBoundException {
         Capteur capteur = capteurs.get(codeUnique);
@@ -243,9 +241,9 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * Modifie l'intervalle de mesure de tous les capteurs enregistrés dans la centrale.
      *
      * @param nouvelIntervalle Nouvel intervalle de mesure global.
-     * @throws MalformedURLException En cas d'URL mal formée lors de la communication avec le capteur.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
-     * @throws NotBoundException Lorsque le capteur distant n'est pas lié correctement.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
+     * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
     public void modifierIntervalleGlobal(int nouvelIntervalle) throws MalformedURLException, RemoteException, NotBoundException {
         for (String codeUnique : capteurs.keySet()) {
@@ -259,8 +257,8 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale
      * Créé une centrale et un registre sur le port 1099, puis relie la centrale au registre.
      *
      * @param args Arguments de la ligne de commande.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
-     * @throws AlreadyBoundException Lorsque la centrale est déjà liée au registre RMI.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
+     * @throws AlreadyBoundException Si la centrale est déjà liée au registre RMI.
      */
     public static void main(String args[]) throws RemoteException, AlreadyBoundException {   
         try {

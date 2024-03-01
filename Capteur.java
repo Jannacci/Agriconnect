@@ -17,12 +17,12 @@ import java.util.TimerTask;
  * @since 2024-03-01
  */
 public class Capteur {
-    private Centrale centrale;                      // Centrale météorologique à laquelle le capteur est connecté
-    private String codeUnique;                      // Code unique associé au capteur
-    private Double latitude;                        // Latitude géographique du capteur
-    private Double longitude;                       // Longitude géographique du capteur
-    private Timer timer;                            // Timer pour effectuer les mesures à intervalles réguliers
-    private static Random random = new Random();    // Générateur de nombres aléatoires
+    private Centrale centrale;                      // Centrale météorologique à laquelle le capteur est connecté.
+    private String codeUnique;                      // Code unique associé au capteur.
+    private Double latitude;                        // Latitude géographique du capteur.
+    private Double longitude;                       // Longitude géographique du capteur.
+    private Timer timer;                            // Timer pour effectuer les mesures à intervalles réguliers.
+    private static Random random = new Random();    // Générateur de nombres aléatoires.
     
     /**
      * Constructeur de la classe Capteur.
@@ -66,8 +66,8 @@ public class Capteur {
      * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
     public void resetTimer(int nouvelIntervalle) throws RemoteException, NotBoundException, MalformedURLException {
-        timer.cancel();                 // Annulation de la tâche actuelle
-        timer = new Timer();            // Création d'un nouveau Timer et planification de la tâche avec le nouvel intervalle
+        timer.cancel();                 // Annulation de la tâche actuelle.
+        timer = new Timer();            // Création d'un nouveau Timer et planification de la tâche avec le nouvel intervalle.
         demarrer(nouvelIntervalle);
     }
 
@@ -130,7 +130,7 @@ public class Capteur {
     /**
      * Arrête le timer du capteur.
      *
-     * @throws RemoteException si une erreur liée à la communication distante survient
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public void arreter() throws RemoteException {
         timer.cancel();

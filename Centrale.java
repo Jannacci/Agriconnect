@@ -13,17 +13,16 @@ import java.util.List;
  * @version 2.0
  * @since 2024-03-01
  */
-public interface Centrale extends Remote
-{
+public interface Centrale extends Remote {
     /**
-     * Ajoute un capteur avec l'intervalle spécifié pour l'enregistrement des mesures.
+     * Ajoute un nouveau capteur à la centrale avec l'intervalle spécifié.
      *
-     * @param intervalle Intervalle de temps entre les mesures du capteur.
+     * @param intervalle Intervalle de mesure du capteur.
      * @throws RemoteException En cas d'erreur lors de l'appel distant.
-     * @throws MalformedURLException Si l'URL du capteur est mal formée.
      * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
-    public void ajouterCapteur(int intervalle) throws RemoteException, MalformedURLException, NotBoundException;
+    public void ajouterCapteur(int intervalle) throws RemoteException, NotBoundException, MalformedURLException;
     
     /**
      * Retire le capteur avec le code unique spécifié.
@@ -84,20 +83,19 @@ public interface Centrale extends Remote
      *
      * @param codeUnique Code unique identifiant le capteur.
      * @param nouvelIntervalle Nouvel intervalle de temps entre les mesures du capteur.
-     * @throws MalformedURLException Si l'URL du capteur est mal formée.
      * @throws RemoteException En cas d'erreur lors de l'appel distant.
      * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
-    public void modifierIntervalleCapteur(String codeUnique, int nouvelIntervalle) throws MalformedURLException, RemoteException, NotBoundException;
+    public void modifierIntervalleCapteur(String codeUnique, int nouvelIntervalle) throws RemoteException, NotBoundException, MalformedURLException;
 
     /**
      * Modifie l'intervalle de temps global pour tous les capteurs enregistrés dans la centrale.
      *
      * @param nouvelIntervalle Nouvel intervalle de temps entre les mesures pour tous les capteurs.
-     * @throws MalformedURLException Si l'URL du capteur est mal formée.
      * @throws RemoteException En cas d'erreur lors de l'appel distant.
      * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
-    public void modifierIntervalleGlobal(int nouvelIntervalle) throws MalformedURLException, RemoteException, NotBoundException;
-    
+    public void modifierIntervalleGlobal(int nouvelIntervalle) throws RemoteException, NotBoundException, MalformedURLException;
 }
