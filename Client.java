@@ -48,8 +48,7 @@ public class Client {
                 int choix = scanner.nextInt();
                 scanner.nextLine();
 
-                // Switch case pour traiter le choix du client
-                switch (choix) {
+                switch (choix) { // Switch case pour traiter le choix du client
                     case 1: // Ajouter un capteur
                         System.out.print("Entrez l'intervalle de mesure du capteur (ms) : ");
                         int intervalle = scanner.nextInt();
@@ -99,7 +98,7 @@ public class Client {
             }
         } catch (RemoteException | NotBoundException | MalformedURLException e) {
             e.printStackTrace();
-        } finally { // Fermer le scanner dans le bloc finally pour s'assurer qu'il est fermé, même en cas d'exception
+        } finally {
             scanner.close();
         }
     }

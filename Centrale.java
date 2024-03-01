@@ -14,6 +14,7 @@ import java.util.List;
  * @since 2024-03-01
  */
 public interface Centrale extends Remote {
+    
     /**
      * Ajoute un nouveau capteur à la centrale avec l'intervalle spécifié.
      *

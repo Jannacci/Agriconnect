@@ -66,8 +66,8 @@ public class Capteur {
      * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
     public void resetTimer(int nouvelIntervalle) throws RemoteException, NotBoundException, MalformedURLException {
-        timer.cancel();                 // Annulation de la tâche actuelle.
-        timer = new Timer();            // Création d'un nouveau Timer et planification de la tâche avec le nouvel intervalle.
+        timer.cancel();         // Annulation de la tâche actuelle.
+        timer = new Timer();    // Création d'un nouveau Timer et planification de la tâche avec le nouvel intervalle.
         demarrer(nouvelIntervalle);
     }
 
