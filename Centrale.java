@@ -19,8 +19,8 @@ public interface Centrale extends Remote
      *
      * @param intervalle Intervalle de temps entre les mesures du capteur.
      * @throws RemoteException En cas d'erreur lors de l'appel distant.
-     * @throws MalformedURLException Si l'URL du capteur est mal formée.
      * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL du capteur est mal formée.
      */
     public void ajouterCapteur(int intervalle) throws RemoteException, MalformedURLException, NotBoundException;
     
@@ -41,5 +41,4 @@ public interface Centrale extends Remote
      * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public void enregistrerMesures(String codeUnique, int temperature, int humidite) throws RemoteException;
-    
 }

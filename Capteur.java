@@ -153,8 +153,7 @@ public class Capteur {
                 centrale.ajouterCapteur(5000);
             }
 
-            // Boucle principale pour le menu interactif
-            while (true) {
+            while (true) { // Boucle principale pour le menu interactif
                 System.out.println("\n╔═══════════════════════════╗");
                 System.out.println("║          Capteur          ║");
                 System.out.println("╚═══════════════════════════╝");

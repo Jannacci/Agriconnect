@@ -33,14 +33,14 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
     }
     
     /**
-     * Ajoute un nouveau capteur à la centrale avec l'intervalle spécifié.
+     * Ajoute un capteur avec l'intervalle spécifié pour l'enregistrement des mesures.
      *
-     * @param intervalle Intervalle de mesure du capteur.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
-     * @throws MalformedURLException En cas d'URL mal formée lors de la communication avec le capteur.
-     * @throws NotBoundException Lorsque le capteur distant n'est pas lié correctement.
+     * @param intervalle Intervalle de temps entre les mesures du capteur.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
+     * @throws NotBoundException Si le capteur n'est pas lié correctement.
+     * @throws MalformedURLException Si l'URL du capteur est mal formée.
      */
-    public synchronized void ajouterCapteur(int intervalle) throws RemoteException, MalformedURLException, NotBoundException {
+    public synchronized void ajouterCapteur(int intervalle) throws RemoteException, NotBoundException, MalformedURLException {
         Capteur capteur = new Capteur();
         
         capteurs.put(capteur.getCodeUnique(), capteur);
@@ -56,7 +56,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
      * Retire le capteur associé au code unique spécifié.
      *
      * @param codeUnique Code unique du capteur à arrêter et retirer.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public synchronized void retirerCapteur(String codeUnique) throws RemoteException {
         capteurs.get(codeUnique).arreter();
@@ -71,7 +71,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
      * @param codeUnique Code unique du capteur.
      * @param temperature Température enregistrée.
      * @param humidite Humidité enregistrée.
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
      */
     public void enregistrerMesures(String codeUnique, int temperature, int humidite) throws RemoteException {
         LocalDateTime heureActuelle = LocalDateTime.now();
@@ -93,8 +93,8 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
      * Méthode principale pour lancer la centrale météorologique.
      *
      * @param args Les arguments de la ligne de commande (non utilisés dans cette application).
-     * @throws RemoteException En cas d'erreur lors de la communication distante.
-     * @throws AlreadyBoundException En cas de liaison déjà existante.
+     * @throws RemoteException En cas d'erreur lors de l'appel distant.
+     * @throws AlreadyBoundException Si la centrale est déjà liée au registre RMI
      */
     public static void main(String args[]) throws RemoteException, AlreadyBoundException
     {   
