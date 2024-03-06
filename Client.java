@@ -11,6 +11,8 @@ import java.util.Scanner;
  *
  * @author Enzo Soulan
  * @author Yon Beaurain
+ * @author Emma Guillemet
+ * @author Matteo Léger
  * @version 2.0
  * @since 2024-03-01
  */
