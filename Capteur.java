@@ -7,7 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * La classe Capteur représente un capteur météorologique qui mesure la température
+ * La classe  Capteur représente un capteur météorologique qui mesure la température
  * et l'humidité à intervalles réguliers et envoie ces mesures à une Centrale météorologique
  * via RMI (Remote Method Invocation).
  *
