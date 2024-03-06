@@ -9,6 +9,8 @@ import java.rmi.*;
  *
  * @author Enzo Soulan
  * @author Yon Beaurain
+ * @author Emma Guillemet
+ * @author Matteo Léger
  * @version 1.0
  * @since 2024-02-09
  */
