@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Cette classe représente l'implémentation d'une centrale météorologique utilisant RMI (Remote Method Invocation).
@@ -22,12 +23,13 @@ import java.util.List;
  * @author Yon Beaurain
  * @author Emma Guillemet
  * @author Matteo Léger
- * @version 2.0
- * @since 2024-03-01
+ * @version 3.0
+ * @since 2024-03-15
  */
 public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
     private static HashMap<String, Capteur> capteurs;   // Collection HashMap stockant les capteurs associés à leurs codes uniques.
-    
+    private Map<String, Actionneur> actionneurs; // Collection HashMap stockant les actionneurs associés à leurs codes uniques.
+
     /**
      * Constructeur par défaut de la classe CentraleImpl.
      *
@@ -36,6 +38,7 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
     public CentraleImpl() throws RemoteException { 
         super();
         capteurs = new HashMap<String, Capteur>();
+        actionneurs = new HashMap<>();
     }
     
     /**
@@ -270,5 +273,47 @@ public class  CentraleImpl extends UnicastRemoteObject implements Centrale {
         } catch(RemoteException re) {
             re.printStackTrace();
         }
+    }
+
+
+
+
+///////////////////////////////////////////////////NOUVELLES FONCTIONS///////////////////////////////////
+
+
+    // Méthode pour ajouter un actionneur à la centrale
+    public void ajouterActionneur(String codeUnique, double latitude, double longitude) throws RemoteException {
+        try {
+            Actionneur actionneur = new Actionneur(codeUnique, latitude, longitude);
+            actionneurs.put(actionneur.getCodeUnique(), actionneur);
+            System.out.println("\nActionneur " + actionneur.getCodeUnique() + " ajouté.");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Méthode pour retirer un actionneur de la centrale
+    public void retirerActionneur(String codeUnique) throws RemoteException {
+        actionneurs.remove(codeUnique);
+        System.out.println("\nActionneur " + codeUnique + " retiré.");
+    }
+
+    // Méthode pour déclencher l'arrosage manuellement pour une durée fixée
+    public void declencherArrosageManuel(String codeActionneur, int duree) throws RemoteException {
+        System.out.println("\nArrosage déclenché manuellement pour l'actionneur " + codeActionneur + " pendant " + duree + "millisecondes.");
+
+        // Simulation de l'arrosage pendant la durée en millisecondes
+        try {
+            Thread.sleep(duree);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nArrosage terminé pour l'actionneur " + codeActionneur);
+    }
+
+    // Méthode pour obtenir l'état de l'arrosage (en cours d'arrosage ou non)
+    public boolean obtenirEtatArrosage() throws RemoteException {
+        return true;
     }
 }

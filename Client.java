@@ -13,8 +13,8 @@ import java.util.Scanner;
  * @author Yon Beaurain
  * @author Emma Guillemet
  * @author Matteo Léger
- * @version 2.0
- * @since 2024-03-01
+ * @version 3.0
+ * @since 2024-03-15
  */
 public class Client {
     

@@ -12,8 +12,8 @@ import java.util.List;
  * @author Yon Beaurain
  * @author Emma Guillemet
  * @author Matteo Léger
- * @version 2.0
- * @since 2024-03-01
+ * @version 3.0
+ * @since 2024-03-15
  */
 public interface Centrale extends Remote {
     
@@ -101,4 +101,13 @@ public interface Centrale extends Remote {
      * @throws MalformedURLException Si l'URL de ma centrale est mal formée.
      */
     public void modifierIntervalleGlobal(int nouvelIntervalle) throws RemoteException, NotBoundException, MalformedURLException;
+
+    //////////////////////////////////////NOUVELLES FONCTIONS///////////////////////////////////////
+    public void ajouterActionneur(String codeUnique, double latitude, double longitude) throws RemoteException;
+
+    public void retirerActionneur(String codeUnique) throws RemoteException;
+
+    public void declencherArrosageManuel(String codeActionneur, int duree) throws RemoteException;
+
+    public boolean obtenirEtatArrosage() throws RemoteException;
 }
