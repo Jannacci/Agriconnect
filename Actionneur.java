@@ -61,4 +61,5 @@ public class Actionneur extends UnicastRemoteObject {
     public Double getCodeLatitude() {
         return latitude;
     }
+    
 }
