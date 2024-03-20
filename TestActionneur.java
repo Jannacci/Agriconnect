@@ -7,10 +7,11 @@ public class TestActionneur {
     public static void main(String args[]) throws RemoteException {
         try {
             Centrale centrale = (Centrale) Naming.lookup("rmi://localhost/Centrale");
-            
+            Actionneur actionneur = new Actionneur("1111", 1, 1);
             // Déclenchement manuel de l'arrosage pour une durée de 5 minutes
             System.out.println("Début de l'arrosage manuel...");
-            centrale.declencherArrosageManuel(null, 5);
+            String codeActionneur = actionneur.getCodeUnique();
+            centrale.declencherArrosageManuel(codeActionneur, 5);
             System.out.println("Arrosage terminé.");
 
             // Obtention de l'état de l'arrosage
